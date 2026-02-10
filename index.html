@@ -216,6 +216,19 @@
         transition: all 0.3s;
       }
 
+      /* Hamburger → X animation when active */
+      #filinvest-dashboard-v2 .nav-hamburger.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      #filinvest-dashboard-v2 .nav-hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      #filinvest-dashboard-v2 .nav-hamburger.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
       /* =========================
        MAIN CONTENT AREA
        ========================= */
@@ -239,16 +252,26 @@
         position: relative;
         height: 400px;
         border-radius: 0 0 18px 18px;
-        overflow: hidden;
+        overflow: visible;
         margin-bottom: 22px;
         margin-left: -24px;
         margin-right: -24px;
+      }
+
+      #filinvest-dashboard-v2 .hero-banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
         background: url("FC.jpg") center 60% / cover no-repeat;
+        z-index: 0;
       }
 
       #filinvest-dashboard-v2 .hero-banner-overlay {
         position: absolute;
         inset: 0;
+        border-radius: inherit;
+        z-index: 1;
         background: linear-gradient(
           to bottom,
           rgba(0, 61, 113, 0.25) 0%,
@@ -259,6 +282,7 @@
 
       #filinvest-dashboard-v2 .hero-banner-content {
         position: relative;
+        z-index: 2;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -282,6 +306,7 @@
         position: relative;
         width: 100%;
         max-width: 480px;
+        z-index: 50;
       }
 
       #filinvest-dashboard-v2 .hero-search-bar {
@@ -324,6 +349,15 @@
         color: #9ca3af;
       }
 
+      #filinvest-dashboard-v2 .hero-search-hint {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 400;
+        letter-spacing: 0.2px;
+        margin-top: -4px;
+        display: none;
+      }
+
       /* --- Inline Search Dropdown (shared by hero and nav) --- */
       #filinvest-dashboard-v2 .search-dropdown {
         display: none;
@@ -336,7 +370,7 @@
         box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
         max-height: 340px;
         overflow-y: auto;
-        z-index: 100;
+        z-index: 200;
         padding: 6px 0;
       }
 
@@ -413,6 +447,11 @@
         font-size: 13px;
       }
 
+      /* --- Hide nav search on homepage (hero search is used instead) --- */
+      #filinvest-dashboard-v2.page-home .nav-search-wrap {
+        display: none !important;
+      }
+
       /* --- Nav Inline Search --- */
       #filinvest-dashboard-v2 .nav-search-wrap {
         position: relative;
@@ -451,12 +490,14 @@
         top: 50%;
         transform: translateY(-50%);
         pointer-events: none;
+        z-index: 1;
       }
 
       #filinvest-dashboard-v2 .nav-search-wrap .search-dropdown {
         min-width: 320px;
         right: 0;
         left: auto;
+        z-index: 1001;
       }
 
       #filinvest-dashboard-v2 .search-icon-btn {
@@ -505,6 +546,8 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: 20px;
         align-items: start;
+        position: relative;
+        z-index: 1;
       }
 
       #filinvest-dashboard-v2 .home-panel {
@@ -2314,14 +2357,23 @@
       /* Extra Large Screens (1920px+) - 4K Displays */
       @media (min-width: 1920px) {
         #filinvest-dashboard-v2 .hero-banner-title {
-          font-size: 32px;
+          font-size: 34px;
+        }
+        #filinvest-dashboard-v2 .hero-banner {
+          height: 440px;
+        }
+        #filinvest-dashboard-v2 .hero-search-wrap {
+          max-width: 540px;
         }
       }
 
       /* Large Screens (1440px - 1920px) */
       @media (min-width: 1440px) and (max-width: 1919px) {
         #filinvest-dashboard-v2 .hero-banner-title {
-          font-size: 28px;
+          font-size: 30px;
+        }
+        #filinvest-dashboard-v2 .hero-banner {
+          height: 420px;
         }
       }
 
@@ -2343,6 +2395,18 @@
         #filinvest-dashboard-v2 .logo-icon {
           width: 34px;
           height: 34px;
+        }
+
+        #filinvest-dashboard-v2 .organization-container {
+          padding: 24px;
+        }
+
+        #filinvest-dashboard-v2 .resources-section {
+          padding: 24px;
+        }
+
+        #filinvest-dashboard-v2 .links-container {
+          padding: 24px;
         }
       }
 
@@ -2370,6 +2434,23 @@
           padding: 14px 28px;
           font-size: 15px;
         }
+
+        #filinvest-dashboard-v2 .home-columns {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        #filinvest-dashboard-v2 .home-columns > .home-panel:last-child {
+          grid-column: 1 / -1;
+        }
+
+        #filinvest-dashboard-v2 .org-card {
+          width: 240px;
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .org-level {
+          gap: 16px;
+        }
       }
 
       /* Tablets & Small Laptops (1024px and below) */
@@ -2385,10 +2466,6 @@
 
         #filinvest-dashboard-v2 .nav-logo-sub {
           display: none;
-        }
-
-        #filinvest-dashboard-v2 .home-columns {
-          grid-template-columns: 1fr 1fr;
         }
 
         #filinvest-dashboard-v2 .hero-banner {
@@ -2415,7 +2492,12 @@
 
         #filinvest-dashboard-v2 .dashboard-header {
           flex-direction: column;
-          gap: 24px;
+          gap: 16px;
+          align-items: flex-start;
+        }
+
+        #filinvest-dashboard-v2 .period-badge {
+          text-align: left;
         }
 
         #filinvest-dashboard-v2 .missions-achievements {
@@ -2425,10 +2507,67 @@
         #filinvest-dashboard-v2 .projects-grid {
           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         }
+
+        #filinvest-dashboard-v2 .links-grid {
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        #filinvest-dashboard-v2 .organization-container {
+          padding: 20px;
+        }
+
+        #filinvest-dashboard-v2 .org-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .org-header h2 {
+          font-size: 22px;
+        }
+
+        #filinvest-dashboard-v2 .resources-section {
+          padding: 20px;
+        }
+
+        #filinvest-dashboard-v2 .section-header {
+          font-size: 20px;
+        }
+
+        #filinvest-dashboard-v2 .links-container {
+          padding: 20px;
+        }
+
+        #filinvest-dashboard-v2 .links-header h2 {
+          font-size: 22px;
+        }
+
+        #filinvest-dashboard-v2 .stat-box {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .stat-value {
+          font-size: 20px;
+        }
+
+        #filinvest-dashboard-v2 .category-tabs {
+          gap: 8px;
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .category-tab {
+          padding: 10px 16px;
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .map-toolbar h2 {
+          font-size: 18px;
+        }
       }
 
       /* Mobile & Small Tablets (768px and below) */
       @media (max-width: 768px) {
+        /* --- Navigation --- */
         #filinvest-dashboard-v2 .top-nav {
           left: 12px;
           right: 12px;
@@ -2443,6 +2582,11 @@
 
         #filinvest-dashboard-v2 .nav-hamburger {
           display: flex;
+          order: -1;
+        }
+
+        #filinvest-dashboard-v2 .nav-logo {
+          display: none;
         }
 
         #filinvest-dashboard-v2 .nav-links {
@@ -2451,14 +2595,14 @@
           top: 100%;
           left: 0;
           right: 0;
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(255, 255, 255, 0.97);
           -webkit-backdrop-filter: blur(18px);
           backdrop-filter: blur(18px);
           flex-direction: column;
           padding: 8px 0;
           border-radius: 0 0 14px 14px;
           border-top: 1px solid rgba(0, 0, 0, 0.06);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
         #filinvest-dashboard-v2 .nav-links.open {
@@ -2466,11 +2610,18 @@
         }
 
         #filinvest-dashboard-v2 .nav-item {
-          padding: 10px 20px;
+          padding: 12px 20px;
           font-size: 14px;
           border-bottom: none;
           width: 100%;
           justify-content: flex-start;
+        }
+
+        #filinvest-dashboard-v2 .nav-item svg {
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          margin-right: 8px;
         }
 
         #filinvest-dashboard-v2 .nav-item.active {
@@ -2483,50 +2634,9 @@
           display: none;
         }
 
-        #filinvest-dashboard-v2 .logo-icon {
-          width: 30px;
-          height: 30px;
-        }
-
-        #filinvest-dashboard-v2 .nav-logo {
-          font-size: 16px;
-        }
-
-        #filinvest-dashboard-v2 .nav-logo-sub {
-          display: none;
-        }
-
         #filinvest-dashboard-v2 .user-avatar {
           width: 30px;
           height: 30px;
-        }
-
-        #filinvest-dashboard-v2 .main-content {
-          padding: 24px 16px;
-          padding-top: 70px;
-        }
-
-        #filinvest-dashboard-v2 .homepage-container {
-          margin-top: -70px;
-        }
-
-        #filinvest-dashboard-v2 .hero-banner {
-          height: 280px;
-          border-radius: 0 0 14px 14px;
-          margin-left: -16px;
-          margin-right: -16px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-wrap {
-          max-width: 340px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-bar {
-          padding: 10px 16px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-bar input {
-          font-size: 13px;
         }
 
         #filinvest-dashboard-v2 .nav-search-wrap .nav-search-input {
@@ -2536,64 +2646,395 @@
 
         #filinvest-dashboard-v2 .nav-search-wrap .search-dropdown {
           min-width: 260px;
+          right: -40px;
         }
 
+        /* --- Main Content --- */
+        #filinvest-dashboard-v2 .main-content {
+          padding: 24px 16px;
+          padding-top: 70px;
+        }
+
+        /* --- Homepage: Google-style (hero only, panels hidden) --- */
+        #filinvest-dashboard-v2 .homepage-container {
+          margin-top: -70px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner {
+          height: calc(100vh - 70px);
+          min-height: 360px;
+          max-height: 600px;
+          border-radius: 0 0 18px 18px;
+          margin-left: -16px;
+          margin-right: -16px;
+          margin-bottom: 0;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner-content {
+          padding: 0 24px;
+          justify-content: center;
+          gap: 16px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner-title {
+          font-size: 22px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-wrap {
+          max-width: 380px;
+          width: 100%;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-bar {
+          padding: 12px 18px;
+          border-radius: 24px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-bar input {
+          font-size: 14px;
+        }
+
+        /* Hide the 3-column panels on mobile (Google-style) */
+        #filinvest-dashboard-v2 .home-columns {
+          display: none;
+        }
+
+        /* Show search hint on mobile */
+        #filinvest-dashboard-v2 .hero-search-hint {
+          display: block;
+        }
+
+        /* --- Page Header Banner (non-home pages) --- */
         #filinvest-dashboard-v2 .page-header-banner {
-          height: 100px;
+          height: 90px;
           border-radius: 0 0 12px 12px;
           margin-top: -70px;
           margin-left: -16px;
           margin-right: -16px;
         }
 
-        #filinvest-dashboard-v2 .hero-banner-title {
-          font-size: 20px;
+        /* --- Dashboard --- */
+        #filinvest-dashboard-v2 .dashboard-header {
+          padding: 18px;
+          flex-direction: column;
+          gap: 14px;
+          align-items: flex-start;
         }
 
-        #filinvest-dashboard-v2 .hero-banner-content {
-          padding: 48px 20px 20px;
+        #filinvest-dashboard-v2 .dashboard-header h1 {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-icon {
+          width: 40px;
+          height: 40px;
+        }
+
+        #filinvest-dashboard-v2 .progress-section {
+          padding: 18px;
+        }
+
+        #filinvest-dashboard-v2 .progress-header h2 {
+          font-size: 16px;
+        }
+
+        #filinvest-dashboard-v2 .stats-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 10px;
+        }
+
+        #filinvest-dashboard-v2 .stat-box {
+          padding: 14px 10px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .stat-value {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .stat-label {
+          font-size: 11px;
+        }
+
+        #filinvest-dashboard-v2 .action-buttons {
+          flex-direction: column;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .btn-primary,
+        #filinvest-dashboard-v2 .dashboard-page .btn-secondary {
+          width: 100%;
+          justify-content: center;
+        }
+
+        #filinvest-dashboard-v2 .missions-achievements {
+          grid-template-columns: 1fr;
           gap: 12px;
         }
 
-        #filinvest-dashboard-v2 .home-columns {
-          grid-template-columns: 1fr;
+        #filinvest-dashboard-v2 .missions-panel,
+        #filinvest-dashboard-v2 .achievements-panel {
+          padding: 16px;
         }
 
-        #filinvest-dashboard-v2 .btn-primary,
-        #filinvest-dashboard-v2 .btn-secondary {
-          width: 100%;
-          justify-content: center;
-          padding: 14px 24px;
+        #filinvest-dashboard-v2 .panel-title {
+          font-size: 16px;
+        }
+
+        #filinvest-dashboard-v2 .achievements-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        /* --- Projects --- */
+        #filinvest-dashboard-v2 .category-tabs {
+          padding: 12px;
+          gap: 6px;
+          overflow-x: auto;
+          flex-wrap: nowrap;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+
+        #filinvest-dashboard-v2 .category-tabs::-webkit-scrollbar {
+          display: none;
+        }
+
+        #filinvest-dashboard-v2 .category-tab {
+          padding: 8px 14px;
+          font-size: 12px;
+          flex-shrink: 0;
         }
 
         #filinvest-dashboard-v2 .projects-grid {
           grid-template-columns: 1fr;
+          gap: 16px;
         }
 
-        #filinvest-dashboard-v2 .links-grid {
+        #filinvest-dashboard-v2 .project-info {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .project-info h3 {
+          font-size: 16px;
+        }
+
+        #filinvest-dashboard-v2 .project-image {
+          height: 160px;
+        }
+
+        /* --- Project Detail --- */
+        #filinvest-dashboard-v2 .detail-header {
           grid-template-columns: 1fr;
+          padding: 16px;
+          gap: 16px;
+        }
+
+        #filinvest-dashboard-v2 .detail-image {
+          height: 200px;
+        }
+
+        #filinvest-dashboard-v2 .detail-info h1 {
+          font-size: 20px;
+        }
+
+        #filinvest-dashboard-v2 .detail-top-bar {
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-start;
+        }
+
+        #filinvest-dashboard-v2 .detail-social-links {
+          align-self: flex-start;
+        }
+
+        #filinvest-dashboard-v2 .overview-two-col {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        #filinvest-dashboard-v2 .detail-tabs {
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          padding: 0 12px;
+        }
+
+        #filinvest-dashboard-v2 .detail-tabs::-webkit-scrollbar {
+          display: none;
+        }
+
+        #filinvest-dashboard-v2 .detail-tab {
+          padding: 10px 14px;
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .detail-tab-content {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .detail-meta-strip {
+          gap: 6px;
+        }
+
+        #filinvest-dashboard-v2 .meta-chip {
+          font-size: 12px;
+          padding: 6px 10px;
+        }
+
+        #filinvest-dashboard-v2 .social-icon-btn {
+          width: 36px;
+          height: 36px;
+        }
+
+        #filinvest-dashboard-v2 .social-icon-btn svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        /* --- Organization --- */
+        #filinvest-dashboard-v2 .organization-container {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .org-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          padding-bottom: 16px;
+          margin-bottom: 20px;
+        }
+
+        #filinvest-dashboard-v2 .org-header h2 {
+          font-size: 20px;
+        }
+
+        #filinvest-dashboard-v2 .org-level {
+          gap: 12px;
         }
 
         #filinvest-dashboard-v2 .org-card {
           width: 100%;
-          max-width: 320px;
+          max-width: 100%;
+          padding: 16px;
         }
 
+        #filinvest-dashboard-v2 .org-card h3 {
+          font-size: 14px;
+        }
+
+        #filinvest-dashboard-v2 .org-avatar {
+          width: 40px;
+          height: 40px;
+          font-size: 15px;
+        }
+
+        #filinvest-dashboard-v2 .org-connector,
+        #filinvest-dashboard-v2 .org-connector-multi,
+        #filinvest-dashboard-v2 .org-connector-specialists {
+          height: 28px;
+          margin: 8px 0;
+        }
+
+        /* --- Resources --- */
+        #filinvest-dashboard-v2 .resources-section {
+          padding: 16px;
+          margin-bottom: 16px;
+        }
+
+        #filinvest-dashboard-v2 .section-header {
+          font-size: 18px;
+          padding-bottom: 12px;
+          margin-bottom: 16px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-header {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-icon {
+          width: 38px;
+          height: 38px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-title span {
+          font-size: 14px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-title {
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-content {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .lot-details-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        /* --- Links --- */
+        #filinvest-dashboard-v2 .links-container {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .links-header h2 {
+          font-size: 20px;
+        }
+
+        #filinvest-dashboard-v2 .links-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .link-card {
+          padding: 16px;
+        }
+
+        #filinvest-dashboard-v2 .link-icon {
+          width: 42px;
+          height: 42px;
+        }
+
+        #filinvest-dashboard-v2 .link-title h3 {
+          font-size: 14px;
+        }
+
+        /* --- Map --- */
         #filinvest-dashboard-v2 .map-toolbar {
           flex-direction: column;
           gap: 12px;
           text-align: center;
+          padding: 14px 16px;
+        }
+
+        #filinvest-dashboard-v2 .map-toolbar h2 {
+          font-size: 17px;
         }
 
         #filinvest-dashboard-v2 .map-container {
-          height: calc(100vh - 280px);
-          min-height: 350px;
+          height: calc(100vh - 260px);
+          min-height: 320px;
         }
 
+        /* --- General Buttons --- */
+        #filinvest-dashboard-v2 .btn-primary,
+        #filinvest-dashboard-v2 .btn-secondary {
+          width: 100%;
+          justify-content: center;
+          padding: 12px 20px;
+          font-size: 14px;
+        }
+
+        /* --- Chatbot --- */
         #filinvest-dashboard-v2 .chat-window {
           width: calc(100vw - 32px);
           right: 16px;
-          bottom: 88px;
+          bottom: 84px;
           height: 420px;
         }
 
@@ -2607,6 +3048,7 @@
 
       /* Small Mobile (480px and below) */
       @media (max-width: 480px) {
+        /* --- Navigation --- */
         #filinvest-dashboard-v2 .top-nav {
           left: 8px;
           right: 8px;
@@ -2623,19 +3065,6 @@
           gap: 8px;
         }
 
-        #filinvest-dashboard-v2 .nav-logo {
-          font-size: 15px;
-        }
-
-        #filinvest-dashboard-v2 .nav-logo-text {
-          display: none;
-        }
-
-        #filinvest-dashboard-v2 .logo-icon {
-          width: 28px;
-          height: 28px;
-        }
-
         #filinvest-dashboard-v2 .user-avatar {
           width: 28px;
           height: 28px;
@@ -2646,93 +3075,494 @@
           height: 18px;
         }
 
-        #filinvest-dashboard-v2 .main-content {
-          padding: 20px 12px;
-          padding-top: 62px;
-        }
-
-        #filinvest-dashboard-v2 .homepage-container {
-          margin-top: -62px;
-        }
-
-        #filinvest-dashboard-v2 .hero-banner {
-          height: 240px;
-          border-radius: 0 0 12px 12px;
-          margin-left: -12px;
-          margin-right: -12px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-wrap {
-          max-width: 260px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-bar {
-          padding: 9px 14px;
-        }
-
-        #filinvest-dashboard-v2 .hero-search-bar input {
-          font-size: 12px;
-        }
-
         #filinvest-dashboard-v2 .nav-search-wrap .nav-search-input {
           display: none;
         }
 
-        #filinvest-dashboard-v2 .page-header-banner {
-          height: 85px;
-          border-radius: 0 0 10px 10px;
-          margin-top: -62px;
-          margin-left: -12px;
-          margin-right: -12px;
+        #filinvest-dashboard-v2 .nav-links {
+          border-radius: 0 0 12px 12px;
         }
 
-        #filinvest-dashboard-v2 .hero-banner-title {
-          font-size: 18px;
+        /* --- Main Content --- */
+        #filinvest-dashboard-v2 .main-content {
+          padding: 16px 10px;
+          padding-top: 60px;
+        }
+
+        /* --- Homepage: Google-style (even more minimal) --- */
+        #filinvest-dashboard-v2 .homepage-container {
+          margin-top: -60px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner {
+          height: calc(100vh - 60px);
+          min-height: 320px;
+          max-height: 560px;
+          border-radius: 0 0 14px 14px;
+          margin-left: -10px;
+          margin-right: -10px;
         }
 
         #filinvest-dashboard-v2 .hero-banner-content {
-          padding: 40px 14px 14px;
+          padding: 0 16px;
+          gap: 14px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner-title {
+          font-size: 20px;
+          line-height: 1.35;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-wrap {
+          max-width: 300px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-bar {
+          padding: 10px 14px;
+          border-radius: 22px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-bar input {
+          font-size: 13px;
+        }
+
+        /* --- Page Header Banner --- */
+        #filinvest-dashboard-v2 .page-header-banner {
+          height: 80px;
+          border-radius: 0 0 10px 10px;
+          margin-top: -60px;
+          margin-left: -10px;
+          margin-right: -10px;
+        }
+
+        /* --- Dashboard --- */
+        #filinvest-dashboard-v2 .dashboard-header {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-header h1 {
+          font-size: 16px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-header p {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .progress-section {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .progress-header h2 {
+          font-size: 15px;
+        }
+
+        #filinvest-dashboard-v2 .progress-icon {
+          width: 34px;
+          height: 34px;
+        }
+
+        #filinvest-dashboard-v2 .stats-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+        }
+
+        #filinvest-dashboard-v2 .stat-box {
+          padding: 12px 8px;
+        }
+
+        #filinvest-dashboard-v2 .stat-box svg {
+          width: 22px;
+          height: 22px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .stat-value {
+          font-size: 16px;
+        }
+
+        #filinvest-dashboard-v2 .dashboard-page .stat-label {
+          font-size: 10px;
+        }
+
+        #filinvest-dashboard-v2 .mission-item {
+          padding: 10px;
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .achievement-badge {
+          padding: 10px;
+        }
+
+        #filinvest-dashboard-v2 .achievement-badge p {
+          font-size: 11px;
+        }
+
+        /* --- Projects --- */
+        #filinvest-dashboard-v2 .category-tabs {
+          padding: 10px;
+          gap: 6px;
+        }
+
+        #filinvest-dashboard-v2 .category-tab {
+          padding: 7px 12px;
+          font-size: 11px;
+        }
+
+        #filinvest-dashboard-v2 .projects-grid {
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .project-image {
+          height: 140px;
+        }
+
+        #filinvest-dashboard-v2 .project-info {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .project-info h3 {
+          font-size: 15px;
+        }
+
+        #filinvest-dashboard-v2 .project-description {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .btn-view-details {
+          padding: 10px;
+          font-size: 13px;
+        }
+
+        /* --- Project Detail --- */
+        #filinvest-dashboard-v2 .detail-header {
+          padding: 12px;
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .detail-image {
+          height: 170px;
+        }
+
+        #filinvest-dashboard-v2 .detail-info h1 {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .detail-desc {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .detail-tab {
+          padding: 8px 12px;
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .detail-tab-content {
+          padding: 12px;
+        }
+
+        #filinvest-dashboard-v2 .meta-chip {
+          font-size: 11px;
+          padding: 5px 8px;
+        }
+
+        #filinvest-dashboard-v2 .btn-back {
+          padding: 8px 14px;
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .units-table {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .units-table thead th {
+          padding: 8px 10px;
+          font-size: 10px;
+        }
+
+        #filinvest-dashboard-v2 .units-table td {
+          padding: 8px 10px;
+        }
+
+        #filinvest-dashboard-v2 .amenities-grid-compact {
+          grid-template-columns: 1fr;
+        }
+
+        /* --- Organization --- */
+        #filinvest-dashboard-v2 .organization-container {
+          padding: 12px;
+        }
+
+        #filinvest-dashboard-v2 .org-header {
+          padding-bottom: 12px;
+          margin-bottom: 16px;
+        }
+
+        #filinvest-dashboard-v2 .org-header h2 {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .org-card {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .org-card h3 {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .org-position {
+          font-size: 11px;
+        }
+
+        #filinvest-dashboard-v2 .org-email {
+          font-size: 11px;
+        }
+
+        #filinvest-dashboard-v2 .org-avatar {
+          width: 36px;
+          height: 36px;
+          font-size: 14px;
+        }
+
+        #filinvest-dashboard-v2 .org-connector,
+        #filinvest-dashboard-v2 .org-connector-multi,
+        #filinvest-dashboard-v2 .org-connector-specialists {
+          height: 20px;
+          margin: 6px 0;
+        }
+
+        /* --- Resources --- */
+        #filinvest-dashboard-v2 .resources-section {
+          padding: 12px;
+          margin-bottom: 12px;
+        }
+
+        #filinvest-dashboard-v2 .section-header {
+          font-size: 16px;
+          padding-bottom: 10px;
+          margin-bottom: 12px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-header {
+          padding: 10px 12px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-icon {
+          width: 32px;
+          height: 32px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-icon svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-title {
           gap: 10px;
         }
 
+        #filinvest-dashboard-v2 .accordion-title span {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .accordion-content {
+          padding: 12px;
+        }
+
+        #filinvest-dashboard-v2 .content-section h4 {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .content-section p {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .lot-details-grid {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        #filinvest-dashboard-v2 .lot-detail-item {
+          padding: 10px 12px;
+        }
+
+        #filinvest-dashboard-v2 .lot-detail-value {
+          font-size: 13px;
+        }
+
+        /* --- Links --- */
+        #filinvest-dashboard-v2 .links-container {
+          padding: 12px;
+        }
+
+        #filinvest-dashboard-v2 .links-header {
+          margin-bottom: 14px;
+        }
+
+        #filinvest-dashboard-v2 .links-header h2 {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .links-header p {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .link-card {
+          padding: 12px;
+          gap: 12px;
+        }
+
+        #filinvest-dashboard-v2 .link-icon {
+          width: 38px;
+          height: 38px;
+        }
+
+        #filinvest-dashboard-v2 .link-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+
+        #filinvest-dashboard-v2 .link-title h3 {
+          font-size: 13px;
+        }
+
+        #filinvest-dashboard-v2 .link-description {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .link-url {
+          font-size: 10px;
+        }
+
+        /* --- Map --- */
+        #filinvest-dashboard-v2 .map-toolbar {
+          padding: 10px 12px;
+          gap: 8px;
+        }
+
+        #filinvest-dashboard-v2 .map-toolbar h2 {
+          font-size: 15px;
+        }
+
+        #filinvest-dashboard-v2 .map-toolbar p {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .map-container {
+          height: calc(100vh - 240px);
+          min-height: 280px;
+        }
+
+        #filinvest-dashboard-v2 .map-toolbar-btn {
+          padding: 8px 16px;
+          font-size: 13px;
+          width: 100%;
+          justify-content: center;
+        }
+
+        /* --- General Buttons --- */
         #filinvest-dashboard-v2 .btn-primary,
         #filinvest-dashboard-v2 .btn-secondary {
           padding: 10px 16px;
           font-size: 13px;
         }
 
-        #filinvest-dashboard-v2 .map-toolbar {
-          flex-direction: column;
-          gap: 10px;
-          text-align: center;
-          padding: 12px 16px;
-        }
-
-        #filinvest-dashboard-v2 .map-toolbar h2 {
-          font-size: 16px;
-        }
-
-        #filinvest-dashboard-v2 .map-container {
-          height: calc(100vh - 260px);
-          min-height: 300px;
-        }
-
+        /* --- Chatbot --- */
         #filinvest-dashboard-v2 .chat-window {
           width: calc(100vw - 16px);
           right: 8px;
-          bottom: 80px;
+          bottom: 78px;
           height: 380px;
         }
 
         #filinvest-dashboard-v2 .chat-toggle {
-          width: 48px;
-          height: 48px;
+          width: 46px;
+          height: 46px;
           bottom: 16px;
-          right: 12px;
+          right: 10px;
         }
 
-        #filinvest-dashboard-v2 .nav-links {
+        #filinvest-dashboard-v2 .chat-toggle svg {
+          width: 22px;
+          height: 22px;
+        }
+
+        #filinvest-dashboard-v2 .chat-header {
+          padding: 14px 16px;
+        }
+
+        #filinvest-dashboard-v2 .chat-header h3 {
+          font-size: 15px;
+        }
+
+        #filinvest-dashboard-v2 .chat-messages {
+          padding: 14px;
+        }
+
+        #filinvest-dashboard-v2 .chat-message {
+          font-size: 13px;
+          padding: 10px 12px;
+        }
+
+        #filinvest-dashboard-v2 .chat-input-area {
+          padding: 10px 12px;
+        }
+
+        #filinvest-dashboard-v2 .chat-input-field {
+          font-size: 13px;
+          padding: 8px 12px;
+        }
+      }
+
+      /* Ultra-small phones (360px and below) */
+      @media (max-width: 360px) {
+        #filinvest-dashboard-v2 .top-nav {
+          left: 6px;
+          right: 6px;
+          top: 4px;
+        }
+
+        #filinvest-dashboard-v2 .nav-container {
+          padding: 0 8px;
+          height: 42px;
+        }
+
+        #filinvest-dashboard-v2 .main-content {
+          padding: 14px 8px;
+          padding-top: 56px;
+        }
+
+        #filinvest-dashboard-v2 .homepage-container {
+          margin-top: -56px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner {
+          margin-left: -8px;
+          margin-right: -8px;
           border-radius: 0 0 12px 12px;
+        }
+
+        #filinvest-dashboard-v2 .hero-banner-title {
+          font-size: 18px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-wrap {
+          max-width: 260px;
+        }
+
+        #filinvest-dashboard-v2 .hero-search-bar input {
+          font-size: 12px;
+        }
+
+        #filinvest-dashboard-v2 .page-header-banner {
+          margin-left: -8px;
+          margin-right: -8px;
+          margin-top: -56px;
+          height: 72px;
+        }
+
+        #filinvest-dashboard-v2 .chat-window {
+          width: calc(100vw - 12px);
+          right: 6px;
+          height: 340px;
         }
       }
 
@@ -2924,11 +3754,25 @@
     </style>
   </head>
   <body>
-    <div id="filinvest-dashboard-v2">
+    <div id="filinvest-dashboard-v2" class="page-home">
       <!-- TOP NAVIGATION -->
       <nav class="top-nav">
         <div class="nav-container">
-          <!-- Logo -->
+          <!-- Hamburger Menu Button (mobile — replaces logo) -->
+          <button
+            class="nav-hamburger"
+            onclick="
+              document.querySelector('.nav-links').classList.toggle('open');
+              this.classList.toggle('active');
+            "
+            aria-label="Menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <!-- Logo (hidden on mobile, hamburger takes its spot) -->
           <a
             href="#"
             class="nav-logo"
@@ -2949,20 +3793,6 @@
               <span class="nav-logo-sub">FILINVEST</span>
             </div>
           </a>
-
-          <!-- Hamburger Menu Button (mobile) -->
-          <button
-            class="nav-hamburger"
-            onclick="
-              document.querySelector('.nav-links').classList.toggle('open');
-              this.classList.toggle('active');
-            "
-            aria-label="Menu"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
 
           <!-- Navigation Links -->
           <ul class="nav-links">
@@ -2997,11 +3827,7 @@
           <div class="nav-right">
             <!-- Search -->
             <div class="nav-search-wrap" id="nav-search-wrap">
-              <button
-                class="search-icon-btn"
-                onclick="SearchHandler.toggleNavSearch()"
-                title="Search"
-              >
+              <button class="search-icon-btn" title="Search">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -3100,7 +3926,7 @@
         </div>
         <div class="chat-messages" id="chat-messages">
           <div class="chat-message bot-message">
-            Hello! I'm the Filinvest Knowledge Hub assistant. How can I help you
+            Hello! I'm the FAI Knowledge Hub assistant. How can I help you
             today?
           </div>
         </div>

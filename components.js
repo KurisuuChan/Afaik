@@ -22,7 +22,7 @@ const Components = {
         <section class="hero-banner">
           <div class="hero-banner-overlay"></div>
           <div class="hero-banner-content">
-            <h1 class="hero-banner-title">Welcome to the<br>Filinvest Knowledge Hub</h1>
+            <h1 class="hero-banner-title">Welcome to the<br>FAI Knowledge Hub</h1>
             <div class="hero-search-wrap">
               <div class="hero-search-bar">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -30,6 +30,7 @@ const Components = {
               </div>
               <div class="search-dropdown" id="hero-search-results"></div>
             </div>
+            <p class="hero-search-hint">Search for projects, permits, organization, links & more</p>
           </div>
         </section>
 

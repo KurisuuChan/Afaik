@@ -87,6 +87,27 @@ const AppRouter = {
       }
     });
 
+    // Toggle homepage class to hide/show nav search
+    const root = document.getElementById("filinvest-dashboard-v2");
+    if (root) {
+      root.classList.toggle("page-home", activePage === "home");
+    }
+
+    // Collapse nav search when navigating (clear state)
+    const navWrap = document.getElementById("nav-search-wrap");
+    const navInput = document.getElementById("nav-search-input");
+    if (navWrap) {
+      navWrap.classList.remove("expanded");
+      if (navInput) navInput.value = "";
+      SearchHandler.closeDropdown("nav-search-results");
+    }
+
+    // Close mobile hamburger menu if open
+    const navLinks = document.querySelector(".nav-links");
+    const hamburger = document.querySelector(".nav-hamburger");
+    if (navLinks) navLinks.classList.remove("open");
+    if (hamburger) hamburger.classList.remove("active");
+
     this.render();
   },
 
@@ -201,10 +222,13 @@ const SearchHandler = {
     // Clear inputs
     const heroInput = document.getElementById("hero-search-input");
     const navInput = document.getElementById("nav-search-input");
-    const navWrap = document.getElementById("nav-search-wrap");
     if (heroInput) heroInput.value = "";
     if (navInput) navInput.value = "";
-    if (navWrap) navWrap.classList.remove("expanded");
+    // Close mobile hamburger menu if open
+    const navLinks = document.querySelector(".nav-links");
+    const hamburger = document.querySelector(".nav-hamburger");
+    if (navLinks) navLinks.classList.remove("open");
+    if (hamburger) hamburger.classList.remove("active");
   },
 
   liveSearch: function (query, dropdownId) {
@@ -225,7 +249,9 @@ const SearchHandler = {
         p.name.toLowerCase().includes(query) ||
         p.description.toLowerCase().includes(query) ||
         p.location.toLowerCase().includes(query) ||
-        p.type.toLowerCase().includes(query),
+        p.type.toLowerCase().includes(query) ||
+        p.category?.toLowerCase().includes(query) ||
+        p.status?.toLowerCase().includes(query),
     );
     if (projectResults.length > 0) {
       html += '<div class="search-category">Projects</div>';
@@ -265,13 +291,14 @@ const SearchHandler = {
       });
     }
 
-    // Search resources
+    // Search resources (permits, events, digitalTools)
     let resourceResults = [];
-    ["permits", "events", "lotProjects"].forEach((cat) => {
+    ["permits", "events", "digitalTools"].forEach((cat) => {
       if (AppData.resources[cat]) {
         AppData.resources[cat].forEach((r) => {
-          if (r.name?.toLowerCase().includes(query)) {
-            resourceResults.push(r);
+          const label = r.title || r.name || "";
+          if (label.toLowerCase().includes(query)) {
+            resourceResults.push({ ...r, _label: label, _cat: cat });
           }
         });
       }
@@ -279,12 +306,59 @@ const SearchHandler = {
     if (resourceResults.length > 0) {
       html += '<div class="search-category">Resources</div>';
       resourceResults.slice(0, 4).forEach((r) => {
+        const color = r.color ? r.color.split(" ")[0] : "#0284c7";
+        const catLabel =
+          {
+            permits: "Permit / Document",
+            events: "Event",
+            digitalTools: "Digital Tool",
+          }[r._cat] || "Resource";
         html += `
           <div class="search-result-item" onmousedown="SearchHandler.selectResult(() => AppRouter.navigate('resources'), '${dropdownId}')">
-            <div class="search-result-icon" style="background: #f0f9ff; color: #0284c7;">📄</div>
+            <div class="search-result-icon" style="background: ${color}15; color: ${color};">📄</div>
             <div class="search-result-info">
-              <div class="search-result-name">${this._highlight(r.name, query)}</div>
-              <div class="search-result-desc">Resource</div>
+              <div class="search-result-name">${this._highlight(r._label, query)}</div>
+              <div class="search-result-desc">${catLabel}</div>
+            </div>
+          </div>`;
+      });
+    }
+
+    // Search organization members
+    const orgResults = AppData.organization.filter(
+      (m) =>
+        m.name.toLowerCase().includes(query) ||
+        m.position.toLowerCase().includes(query) ||
+        m.email?.toLowerCase().includes(query),
+    );
+    if (orgResults.length > 0) {
+      html += '<div class="search-category">Organization</div>';
+      orgResults.slice(0, 4).forEach((m) => {
+        html += `
+          <div class="search-result-item" onmousedown="SearchHandler.selectResult(() => AppRouter.navigate('organization'), '${dropdownId}')">
+            <div class="search-result-icon" style="background: #f0fdf4; color: #16a34a;">👤</div>
+            <div class="search-result-info">
+              <div class="search-result-name">${this._highlight(m.name, query)}</div>
+              <div class="search-result-desc">${m.position.split("•")[0].trim()}</div>
+            </div>
+          </div>`;
+      });
+    }
+
+    // Search lot projects comparison
+    const lotResults = AppData.lotProjects.filter((l) =>
+      l.title.toLowerCase().includes(query),
+    );
+    if (lotResults.length > 0) {
+      html += '<div class="search-category">Lot Projects</div>';
+      lotResults.slice(0, 4).forEach((l) => {
+        const color = l.color ? l.color.split(" ")[0] : "#003d71";
+        html += `
+          <div class="search-result-item" onmousedown="SearchHandler.selectResult(() => AppRouter.navigate('resources'), '${dropdownId}')">
+            <div class="search-result-icon" style="background: ${color}15; color: ${color};">🏡</div>
+            <div class="search-result-info">
+              <div class="search-result-name">${this._highlight(l.title, query)}</div>
+              <div class="search-result-desc">Lot Comparison</div>
             </div>
           </div>`;
       });
@@ -411,7 +485,7 @@ const ChatBot = {
     ) {
       return "Explore our interactive virtual tour on the <strong>Map Explorer</strong> page!";
     } else {
-      return "Hello! I'm the Filinvest Knowledge Hub assistant. I can help you navigate our projects, team, resources, and more. What would you like to know?";
+      return "Hello! I'm the FAI Knowledge Hub assistant. I can help you navigate our projects, team, resources, and more. What would you like to know?";
     }
   },
 
@@ -441,7 +515,7 @@ function initializeApp() {
     });
   });
 
-  // Set up search functionality
+  // Set up search functionality — click icon to toggle search bar
   const navSearchBtn = document.querySelector(".search-icon-btn");
   if (navSearchBtn) {
     navSearchBtn.addEventListener("click", (e) => {
@@ -457,7 +531,7 @@ function initializeApp() {
     if (heroWrap && !heroWrap.contains(e.target)) {
       SearchHandler.closeDropdown("hero-search-results");
     }
-    // Nav search
+    // Nav search — collapse when clicking outside
     const navWrap = document.getElementById("nav-search-wrap");
     if (navWrap && !navWrap.contains(e.target)) {
       navWrap.classList.remove("expanded");
