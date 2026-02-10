@@ -468,6 +468,41 @@ const Components = {
             : ""
         }
 
+        <!-- Available Unit Types Section -->
+        ${
+          project.unitTypes && project.unitTypes.length > 0
+            ? `
+          <div class="detail-section glass">
+            <h2>Available Unit Types</h2>
+            <div class="unit-types-grid">
+              ${project.unitTypes
+                .map(
+                  (unit) => `
+                <div class="unit-type-card">
+                  <div class="unit-header">
+                    <h3>${unit.name}</h3>
+                    <span class="availability-badge availability-${unit.availability.toLowerCase().replace(/\s+/g, "-")}">${unit.availability}</span>
+                  </div>
+                  <div class="unit-details">
+                    <div class="unit-detail">
+                      <small>Size</small>
+                      <strong>${unit.size}</strong>
+                    </div>
+                    <div class="unit-detail">
+                      <small>Price Range</small>
+                      <strong>${unit.priceRange}</strong>
+                    </div>
+                  </div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+            : ""
+        }
+
         <!-- Amenities Section -->
         ${
           project.amenities && project.amenities.length > 0

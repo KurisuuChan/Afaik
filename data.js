@@ -41,6 +41,44 @@ const AppData = {
       color: "#2563eb",
       units: "764",
       completion: "2028",
+      unitTypes: [
+        {
+          name: "1-BR Classic",
+          size: "52-60 sqm",
+          priceRange: "₱14.5M - ₱19.1M",
+          availability: "Available",
+        },
+        {
+          name: "2-BR Classic",
+          size: "84-104 sqm",
+          priceRange: "₱27.5M - ₱33.5M",
+          availability: "Available",
+        },
+        {
+          name: "3-BR Classic",
+          size: "181 sqm",
+          priceRange: "₱54.0M - ₱58.2M",
+          availability: "Few Units Left",
+        },
+        {
+          name: "1-BR Garden",
+          size: "70 sqm",
+          priceRange: "₱21.7M - ₱22.0M",
+          availability: "Only 2 Units Left",
+        },
+        {
+          name: "2-BR Garden",
+          size: "96-118 sqm",
+          priceRange: "₱31.8M - ₱38.6M",
+          availability: "Available",
+        },
+        {
+          name: "3-BR Garden Penthouse",
+          size: "226-237 sqm",
+          priceRange: "₱78.4M - ₱81.5M",
+          availability: "Exclusive",
+        },
+      ],
     },
     {
       id: 2,
