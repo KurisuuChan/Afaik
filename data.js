@@ -73,6 +73,9 @@ const AppData = {
           priceRange: "₱78.4M - ₱81.5M",
         },
       ],
+      website: "https://1001parkwayresidences.com/",
+      facebook: "https://www.facebook.com/1001Parkway",
+      instagram: "https://www.instagram.com/1001parkwayresidences/",
     },
     {
       id: 2,

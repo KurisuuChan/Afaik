@@ -364,11 +364,44 @@ const Components = {
 
     return `
       <div class="project-detail">
-        <!-- Back Button -->
-        <button class="btn-back" onclick="AppState.selectProject(null)">
-          ${Icons.arrowLeft}
-          <span>Back to Projects</span>
-        </button>
+        <!-- Top Bar: Back Button + Social Links -->
+        <div class="detail-top-bar">
+          <button class="btn-back" onclick="AppState.selectProject(null)">
+            ${Icons.arrowLeft}
+            <span>Back to Projects</span>
+          </button>
+          ${
+            project.website || project.facebook || project.instagram
+              ? `
+          <div class="detail-social-links">
+            ${
+              project.website
+                ? `
+            <a href="${project.website}" target="_blank" rel="noopener noreferrer" class="social-icon-btn" title="Visit Website">
+              ${Icons.globe}
+            </a>`
+                : ""
+            }
+            ${
+              project.facebook
+                ? `
+            <a href="${project.facebook}" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-icon-facebook" title="Facebook">
+              ${Icons.facebook}
+            </a>`
+                : ""
+            }
+            ${
+              project.instagram
+                ? `
+            <a href="${project.instagram}" target="_blank" rel="noopener noreferrer" class="social-icon-btn social-icon-instagram" title="Instagram">
+              ${Icons.instagram}
+            </a>`
+                : ""
+            }
+          </div>`
+              : ""
+          }
+        </div>
 
         <!-- Compact Header -->
         <div class="detail-header glass">

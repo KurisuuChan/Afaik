@@ -1015,7 +1015,7 @@
       #filinvest-dashboard-v2 .project-detail {
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 16px;
       }
 
       #filinvest-dashboard-v2 .btn-back {
@@ -1041,6 +1041,14 @@
       #filinvest-dashboard-v2 .btn-back:hover {
         background: rgba(255, 255, 255, 0.95);
         border-color: rgba(0, 82, 163, 0.2);
+      }
+
+      /* --- Top Bar: Back + Social --- */
+      #filinvest-dashboard-v2 .detail-top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: -4px;
       }
 
       /* --- Header: image + info side by side --- */
@@ -1148,6 +1156,60 @@
         height: 16px;
         color: #f59e0b;
         flex-shrink: 0;
+      }
+
+      /* --- Social Media Links --- */
+      #filinvest-dashboard-v2 .detail-social-links {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+      }
+
+      #filinvest-dashboard-v2 .social-icon-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        text-decoration: none;
+        color: #4b5563;
+        transition: all 0.3s ease;
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+
+      #filinvest-dashboard-v2 .social-icon-btn:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 6px 16px rgba(0, 0, 0, 0.12),
+          0 3px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      #filinvest-dashboard-v2 .social-icon-btn svg {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+
+      #filinvest-dashboard-v2 .social-icon-facebook {
+        color: #1877f2;
+      }
+
+      #filinvest-dashboard-v2 .social-icon-facebook:hover {
+        color: #0c63d4;
+      }
+
+      #filinvest-dashboard-v2 .social-icon-instagram {
+        color: #e4405f;
+      }
+
+      #filinvest-dashboard-v2 .social-icon-instagram:hover {
+        color: #d31e40;
       }
 
       /* --- Tabs --- */
