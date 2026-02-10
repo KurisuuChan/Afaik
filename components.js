@@ -494,7 +494,6 @@ const Components = {
                     <th>Unit Type</th>
                     <th>Size</th>
                     <th>Price Range</th>
-                    <th>Availability</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -505,7 +504,6 @@ const Components = {
                     <td class="unit-name-cell"><strong>${unit.name}</strong></td>
                     <td>${unit.size}</td>
                     <td class="unit-price-cell">${unit.priceRange}</td>
-                    <td><span class="availability-badge availability-${unit.availability.toLowerCase().replace(/\s+/g, "-")}">${unit.availability}</span></td>
                   </tr>`,
                     )
                     .join("")}
