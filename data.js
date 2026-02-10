@@ -488,6 +488,101 @@ const AppData = {
     },
   ],
 
+  // ===== LOT PROJECTS COMPARISON DATA =====
+  lotProjects: [
+    {
+      id: 101,
+      title: "The Glades",
+      color: "#22c55e #16a34a",
+      details: {
+        "Price/sqm (VAT ex)": "43,000",
+        "Total Lots": "287",
+        "Average Lot Size": "223 sqm",
+        "Min Lot Size": "191 sqm",
+        "Max Lot Size": "453 sqm",
+      },
+      paymentSchemes: {
+        "Reservation Fee": "₱100,000",
+        Cash: "100 - 10%",
+        Deferred: "100(12)",
+        "Bank Financing": "10(24).90",
+      },
+    },
+    {
+      id: 102,
+      title: "Celestia",
+      color: "#a855f7 #9333ea",
+      details: {
+        "Price/sqm (VAT ex)": "50,000",
+        "Total Lots": "273",
+        "Average Lot Size": "463 sqm",
+        "Min Lot Size": "345 sqm",
+        "Max Lot Size": "1,148 sqm",
+      },
+      paymentSchemes: {
+        "Reservation Fee": "₱100,000",
+        Cash: "95-5 - 9%",
+        Deferred: "20(1).80(36) - 2%",
+        "Bank Financing": "20(36).80",
+      },
+    },
+    {
+      id: 103,
+      title: "Arborage (Combined)",
+      color: "#f59e0b #d97706",
+      details: {
+        "Price/sqm (VAT ex)": "A: 55k / B: 64k / C: 57k",
+        "Total Lots": "241",
+        "Average Lot Size": "257 sqm",
+        "Min Lot Size": "196 sqm",
+        "Max Lot Size": "454 sqm",
+      },
+      paymentSchemes: {
+        "Reservation Fee": "₱50,000",
+        Cash: "95-5 - 5%",
+        Deferred: "100(24)",
+        "Bank Financing": "10 (1) - 20 (24) / 70",
+      },
+    },
+    {
+      id: 104,
+      title: "Prom II - RFO",
+      color: "#3b82f6 #2563eb",
+      details: {
+        "Price/sqm (VAT ex)": "118,114",
+        "Total Lots": "47",
+        "Average Lot Size": "264 sqm",
+        "Min Lot Size": "125 sqm",
+        "Max Lot Size": "652 sqm",
+      },
+      paymentSchemes: {
+        "Reservation Fee": "₱50,000",
+        Cash: "100 - 10%",
+        Deferred: "30 (1) - 70 (24) - 3%\n10 (1) - 90 (24) - 1%",
+        "Bank Financing": "20 (24) - 80",
+      },
+    },
+    {
+      id: 105,
+      title: "Prom II - Terrace Homes",
+      color: "#64748b #475569",
+      details: {
+        "Price/sqm (VAT ex)": "175,479",
+        "Total Lots": "43",
+        "Average Lot Size": "298 sqm",
+        "Min Lot Size": "188 sqm",
+        "Max Lot Size": "450 sqm",
+      },
+      paymentSchemes: {
+        "Reservation Fee": "₱100,000",
+        Cash: "100 - 10%",
+        Deferred:
+          "30 (1) - 70 (24) - 3%\n30 (6) - 70 (19) - 3%\n30 (6) - 70 (24)",
+        "Bank Financing": "30 (12) - 70\n10 (12) - 90",
+      },
+    },
+  ],
+
   // ===== RESOURCES DATA =====
   resources: {
     permits: [

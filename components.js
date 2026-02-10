@@ -675,6 +675,11 @@ const Components = {
         8: Icons.building, // Open House Events
         9: Icons.calendar, // Event Forms (External)
         10: Icons.monitor, // ETC Plus
+        101: Icons.home, // The Glades
+        102: Icons.home, // Celestia
+        103: Icons.home, // Arborage
+        104: Icons.home, // Prom II - RFO
+        105: Icons.home, // Prom II - Terrace Homes
       };
       return iconMap[id] || Icons.fileText;
     };
@@ -720,6 +725,59 @@ const Components = {
       `;
     };
 
+    // Offset for lot project accordion indices
+    const lotOffset = 1000;
+
+    const renderLotAccordion = (project, index) => {
+      const isActive = activeAccordion === lotOffset + index;
+      const colors = project.color.split(" ");
+      return `
+        <div class="accordion-item ${isActive ? "active" : ""}">
+          <div class="accordion-header" onclick="AppState.toggleAccordion(${lotOffset + index})">
+            <div class="accordion-title">
+              <div class="accordion-icon" style="background: linear-gradient(135deg, ${colors[0]}, ${colors[1]});">
+                ${getResourceIcon(project.id)}
+              </div>
+              <span>${project.title}</span>
+            </div>
+            <div class="accordion-chevron">
+              ${Icons.chevronDown}
+            </div>
+          </div>
+          <div class="accordion-content" style="display: ${isActive ? "block" : "none"};">
+            <div class="content-section">
+              <h4>Lot Details</h4>
+              <div class="lot-details-grid">
+                ${Object.entries(project.details)
+                  .map(
+                    ([label, value]) => `
+                <div class="lot-detail-item">
+                  <span class="lot-detail-label">${label}</span>
+                  <span class="lot-detail-value">${value}</span>
+                </div>`,
+                  )
+                  .join("")}
+              </div>
+            </div>
+            <div class="content-section">
+              <h4>Standard Payment Schemes</h4>
+              <div class="lot-details-grid">
+                ${Object.entries(project.paymentSchemes)
+                  .map(
+                    ([label, value]) => `
+                <div class="lot-detail-item">
+                  <span class="lot-detail-label">${label}</span>
+                  <span class="lot-detail-value">${value.replace(/\n/g, "<br>")}</span>
+                </div>`,
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    };
+
     return `
       <div class="resources-page">
         <!-- Permits Section -->
@@ -742,6 +800,14 @@ const Components = {
                 ),
               )
               .join("")}
+          </div>
+        </div>
+
+        <!-- Project Payment Schemes Section -->
+        <div class="resources-section glass">
+          <h2 class="section-header">Project Payment Schemes</h2>
+          <div class="accordion-container">
+            ${AppData.lotProjects.map((project, index) => renderLotAccordion(project, index)).join("")}
           </div>
         </div>
 
