@@ -709,6 +709,7 @@ const Components = {
         ramco: Icons.briefcase, // Ramco
         ourlink: Icons.layers, // OurLink
         "smartsheet-form": Icons.formInput, // PR Form
+        "rfp-form": Icons.shoppingCart, // RFP Form
       };
       return iconMap[id] || Icons.link;
     };
@@ -736,7 +737,6 @@ const Components = {
                     ${Icons.externalLink}
                   </div>
                   <p class="link-description">${link.description}</p>
-                  <p class="link-url">${link.url}</p>
                 </div>
               </a>
               `;

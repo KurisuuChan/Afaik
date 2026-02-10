@@ -438,6 +438,13 @@ const AppData = {
       description: "Smartsheet request form",
       color: "#f97316 #ea580c",
     },
+    {
+      id: "rfp-form",
+      name: "Request For Purchase (RFP)",
+      url: "https://app.smartsheet.com/b/form/019a9a97c9e973a198864df401c03f25",
+      description: "Purchase request form",
+      color: "#8b5cf6 #7c3aed",
+    },
   ],
 
   // ===== RESOURCES DATA =====
